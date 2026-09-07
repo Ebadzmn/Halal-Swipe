@@ -1,19 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:halal_swipe/features/auth/login/page/login_page.dart';
 import 'package:halal_swipe/features/auth/signup/page/signup_page.dart';
+import 'package:halal_swipe/features/auth/verification/verification_processing_screen.dart';
+import 'package:halal_swipe/features/auth/verification/verification_success_screen.dart';
+import 'package:halal_swipe/features/auth/verification/verify_identity_screen.dart';
 import 'package:halal_swipe/features/auth/welcome/welcome_auth_screen.dart';
+import 'package:halal_swipe/features/chat/chat_screen.dart';
 import 'package:halal_swipe/features/home/page/home_page.dart';
+import 'package:halal_swipe/features/matches/match_detail_screen.dart';
+import 'package:halal_swipe/features/matches/match_ready_screen.dart';
+import 'package:halal_swipe/features/matches/models/match_profile.dart';
+import 'package:halal_swipe/features/matches/todays_best_matches_screen.dart';
+import 'package:halal_swipe/features/matches/unlock_photo_screen.dart';
 import 'package:halal_swipe/features/onboarding/onboarding_screen.dart';
+import 'package:halal_swipe/features/preferences/setup_preferences_screen.dart';
+import 'package:halal_swipe/features/profile/setup_profile_screen.dart';
+import 'package:halal_swipe/features/roadmap/nikah_roadmap_screen.dart';
 import 'package:halal_swipe/routes/app_routes.dart';
 
 class AppPages {
   static const String initial = AppRoutes.onboarding;
 
-  static Map<String, WidgetBuilder> get routes => {
-        AppRoutes.onboarding: (context) => const OnboardingScreen(),
-        AppRoutes.welcomeAuth: (context) => const WelcomeAuthScreen(),
-        AppRoutes.login: (context) => const LoginPage(),
-        AppRoutes.signup: (context) => const SignupPage(),
-        AppRoutes.home: (context) => const HomePage(),
-      };
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case AppRoutes.onboarding:
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+      case AppRoutes.welcomeAuth:
+        return MaterialPageRoute(builder: (_) => const WelcomeAuthScreen());
+      case AppRoutes.login:
+        return MaterialPageRoute(builder: (_) => const LoginPage());
+      case AppRoutes.signup:
+        return MaterialPageRoute(builder: (_) => const SignupPage());
+      case AppRoutes.verifyIdentity:
+        return MaterialPageRoute(builder: (_) => const VerifyIdentityScreen());
+      case AppRoutes.verificationProcessing:
+        return MaterialPageRoute(
+            builder: (_) => const VerificationProcessingScreen());
+      case AppRoutes.verificationSuccess:
+        return MaterialPageRoute(
+            builder: (_) => const VerificationSuccessScreen());
+      case AppRoutes.setupProfile:
+        return MaterialPageRoute(builder: (_) => const SetupProfileScreen());
+      case AppRoutes.setupPreferences:
+        return MaterialPageRoute(
+            builder: (_) => const SetupPreferencesScreen());
+      case AppRoutes.home:
+        return MaterialPageRoute(builder: (_) => const HomePage());
+      case AppRoutes.matchDetail:
+        final profile = (settings.arguments as MatchProfile?) ??
+            MatchProfile.sampleMatches.first;
+        return MaterialPageRoute(
+            builder: (_) => MatchDetailScreen(profile: profile));
+      case AppRoutes.todaysBestMatches:
+        return MaterialPageRoute(
+            builder: (_) => const TodaysBestMatchesScreen());
+      case AppRoutes.unlockPhoto:
+        final profile = (settings.arguments as MatchProfile?) ??
+            MatchProfile.sampleMatches.first;
+        return MaterialPageRoute(
+            builder: (_) => UnlockPhotoScreen(profile: profile));
+      case AppRoutes.matchReady:
+        final profile = (settings.arguments as MatchProfile?) ??
+            MatchProfile.sampleMatches.first;
+        return MaterialPageRoute(
+            builder: (_) => MatchReadyScreen(profile: profile));
+      case AppRoutes.roadmap:
+        return MaterialPageRoute(builder: (_) => const NikahRoadmapScreen());
+      case AppRoutes.chat:
+        final profile = (settings.arguments as MatchProfile?) ??
+            MatchProfile.sampleMatches.first;
+        return MaterialPageRoute(
+            builder: (_) => ChatScreen(profile: profile));
+      default:
+        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+    }
+  }
 }

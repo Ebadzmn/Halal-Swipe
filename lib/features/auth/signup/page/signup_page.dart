@@ -36,7 +36,7 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   void _onSignUpPressed() {
-    Navigator.pushReplacementNamed(context, AppRoutes.home);
+    Navigator.pushReplacementNamed(context, AppRoutes.verifyIdentity);
   }
 
   @override
