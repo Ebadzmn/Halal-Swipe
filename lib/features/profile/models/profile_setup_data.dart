@@ -29,9 +29,10 @@ class UserProfileData {
   String smokingStatus;
   List<String> hobbies;
 
-  // Screen 14: Profile Photos
+  // Screen 14: Profile Photos & Publishing Control
   List<String> photoPlaceholders;
   bool isBlurEnabled;
+  bool isPublishedForMatches;
 
   UserProfileData({
     this.name = 'Ahmad Al-Mansoor',
@@ -58,6 +59,7 @@ class UserProfileData {
     List<String>? hobbies,
     List<String>? photoPlaceholders,
     this.isBlurEnabled = true,
+    this.isPublishedForMatches = false,
   })  : islamicValues = islamicValues ??
             ['Quran Recitation', 'Charity (Sadaqah)', 'Family First', 'Modesty'],
         hobbies = hobbies ??

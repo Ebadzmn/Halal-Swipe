@@ -12,9 +12,14 @@ import 'package:halal_swipe/features/matches/match_ready_screen.dart';
 import 'package:halal_swipe/features/matches/models/match_profile.dart';
 import 'package:halal_swipe/features/matches/todays_best_matches_screen.dart';
 import 'package:halal_swipe/features/matches/unlock_photo_screen.dart';
+import 'package:halal_swipe/features/married_hub/married_couple_hub_screen.dart';
 import 'package:halal_swipe/features/onboarding/onboarding_screen.dart';
 import 'package:halal_swipe/features/preferences/setup_preferences_screen.dart';
+import 'package:halal_swipe/features/profile/edit_profile_screen.dart';
+import 'package:halal_swipe/features/profile/models/profile_setup_data.dart';
+import 'package:halal_swipe/features/profile/my_profile_screen.dart';
 import 'package:halal_swipe/features/profile/setup_profile_screen.dart';
+import 'package:halal_swipe/features/roadmap/nikah_celebration_screen.dart';
 import 'package:halal_swipe/features/roadmap/nikah_roadmap_screen.dart';
 import 'package:halal_swipe/features/splash/splash_screen.dart';
 import 'package:halal_swipe/routes/app_routes.dart';
@@ -90,6 +95,19 @@ class AppPages {
             builder: (_) => MatchReadyScreen(profile: profile));
       case AppRoutes.roadmap:
         return MaterialPageRoute(builder: (_) => const NikahRoadmapScreen());
+      case AppRoutes.nikahCelebration:
+        return MaterialPageRoute(
+            builder: (_) => const NikahCelebrationScreen());
+      case AppRoutes.marriedCoupleHub:
+        return MaterialPageRoute(
+            builder: (_) => const MarriedCoupleHubScreen());
+      case AppRoutes.myProfile:
+        return MaterialPageRoute(
+            builder: (_) => const MyProfileScreen());
+      case AppRoutes.editProfile:
+        final profile = settings.arguments as UserProfileData?;
+        return MaterialPageRoute(
+            builder: (_) => EditProfileScreen(profileData: profile));
       case AppRoutes.chat:
         final profile = (settings.arguments as MatchProfile?) ??
             MatchProfile.sampleMatches.first;

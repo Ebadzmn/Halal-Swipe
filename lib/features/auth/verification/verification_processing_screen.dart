@@ -17,7 +17,7 @@ class _VerificationProcessingScreenState
   int _currentStepIndex = 0;
   Timer? _timer;
 
-  static const Color _primaryPink = Color(0xFFD64D7B);
+  static const Color _primaryPink = Color(0xFF941235);
   static const Color _textDark = Color(0xFF1E2022);
   static const Color _textGrey = Color(0xFF5A606E);
 

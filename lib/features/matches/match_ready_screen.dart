@@ -7,8 +7,8 @@ class MatchReadyScreen extends StatelessWidget {
 
   const MatchReadyScreen({super.key, required this.profile});
 
-  static const Color _primaryPink = Color(0xFFD64D7B);
-  static const Color _buttonPink = Color(0xFFD44F7A);
+  static const Color _primaryPink = Color(0xFF941235);
+  static const Color _buttonPink = Color(0xFF941235);
   static const Color _emeraldGreen = Color(0xFF007554);
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:halal_swipe/features/chat/call_screen.dart';
 import 'package:halal_swipe/features/matches/models/match_profile.dart';
 import 'package:halal_swipe/routes/app_routes.dart';
 
@@ -29,8 +30,8 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
-  static const Color _primaryPink = Color(0xFFD64D7B);
-  static const Color _buttonPink = Color(0xFFD44F7A);
+  static const Color _primaryPink = Color(0xFF941235);
+  static const Color _buttonPink = Color(0xFF941235);
   static const Color _emeraldGreen = Color(0xFF007554);
   static const Color _textDark = Color(0xFF1E2022);
   static const Color _textGrey = Color(0xFF6B7280);
@@ -273,29 +274,46 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
         actions: [
-          // Always Accessible WALI INVITE Button
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
-            child: ElevatedButton.icon(
-              onPressed: _showWaliInviteDialog,
-              icon: const Icon(Icons.shield_rounded, size: 14),
-              label: const Text(
-                'Invite Wali',
-                style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w800),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFFF0F5),
-                foregroundColor: _buttonPink,
-                elevation: 0,
-                side: const BorderSide(color: Color(0xFFFFD1DC), width: 1.2),
-                shape: const StadiumBorder(),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-              ),
-            ),
+          // Audio Call Button
+          IconButton(
+            icon: const Icon(Icons.call_rounded, color: _primaryPink, size: 21),
+            tooltip: 'Audio Call',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CallScreen(
+                    partnerName: widget.profile.name,
+                    partnerEmoji: widget.profile.avatarEmoji,
+                    isVideoCall: false,
+                    isWaliJoined: true,
+                  ),
+                ),
+              );
+            },
+          ),
+          // Video Call Button
+          IconButton(
+            icon: const Icon(Icons.videocam_rounded, color: _primaryPink, size: 23),
+            tooltip: 'Video Call',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CallScreen(
+                    partnerName: widget.profile.name,
+                    partnerEmoji: widget.profile.avatarEmoji,
+                    isVideoCall: true,
+                    isWaliJoined: true,
+                  ),
+                ),
+              );
+            },
           ),
           // View Roadmap
           IconButton(
-            icon: const Icon(Icons.map_rounded, color: _primaryPink, size: 22),
+            icon: const Icon(Icons.map_rounded, color: _primaryPink, size: 21),
+            tooltip: 'Roadmap',
             onPressed: () {
               Navigator.pushNamed(context, AppRoutes.roadmap);
             },
@@ -356,14 +374,21 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
               child: Row(
                 children: [
-                  // Suggested Icebreaker Azura Icon
+                  // Azura Suggested Prompt Quick Button
                   IconButton(
                     icon: const Icon(Icons.auto_awesome_rounded,
                         color: Color(0xFFFFB800), size: 22),
+                    tooltip: 'Azura Halal Prompt',
                     onPressed: () {
                       _messageController.text =
                           "What are your thoughts on balancing career and family life?";
                     },
+                  ),
+                  // Wali / Call Quick Action
+                  IconButton(
+                    icon: const Icon(Icons.shield_rounded, color: _emeraldGreen, size: 22),
+                    tooltip: 'Invite Wali',
+                    onPressed: _showWaliInviteDialog,
                   ),
 
                   // Text Field
