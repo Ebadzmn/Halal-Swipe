@@ -16,15 +16,39 @@ import 'package:halal_swipe/features/onboarding/onboarding_screen.dart';
 import 'package:halal_swipe/features/preferences/setup_preferences_screen.dart';
 import 'package:halal_swipe/features/profile/setup_profile_screen.dart';
 import 'package:halal_swipe/features/roadmap/nikah_roadmap_screen.dart';
+import 'package:halal_swipe/features/splash/splash_screen.dart';
 import 'package:halal_swipe/routes/app_routes.dart';
 
 class AppPages {
-  static const String initial = AppRoutes.onboarding;
+  static const String initial = AppRoutes.splash;
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutes.splash:
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case AppRoutes.onboarding:
-        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const OnboardingScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final curvedAnimation = CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOutCubicEmphasized,
+            );
+            return FadeTransition(
+              opacity: CurvedAnimation(
+                parent: animation,
+                curve: const Interval(0.0, 0.7, curve: Curves.easeIn),
+              ),
+              child: ScaleTransition(
+                scale: Tween<double>(begin: 0.92, end: 1.0)
+                    .animate(curvedAnimation),
+                child: child,
+              ),
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 750),
+        );
       case AppRoutes.welcomeAuth:
         return MaterialPageRoute(builder: (_) => const WelcomeAuthScreen());
       case AppRoutes.login:
