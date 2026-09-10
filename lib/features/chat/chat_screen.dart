@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:halal_swipe/features/chat/call_screen.dart';
 import 'package:halal_swipe/features/matches/models/match_profile.dart';
 import 'package:halal_swipe/routes/app_routes.dart';
 
@@ -29,8 +30,8 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
-  static const Color _primaryPink = Color(0xFFD64D7B);
-  static const Color _buttonPink = Color(0xFFD44F7A);
+  static const Color _primaryPink = Color(0xFF941235);
+  static const Color _buttonPink = Color(0xFF941235);
   static const Color _emeraldGreen = Color(0xFF007554);
   static const Color _textDark = Color(0xFF1E2022);
   static const Color _textGrey = Color(0xFF6B7280);
@@ -273,53 +274,178 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
         actions: [
-          // Always Accessible WALI INVITE Button
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
-            child: ElevatedButton.icon(
-              onPressed: _showWaliInviteDialog,
-              icon: const Icon(Icons.shield_rounded, size: 14),
-              label: const Text(
-                'Invite Wali',
-                style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w800),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFFF0F5),
-                foregroundColor: _buttonPink,
-                elevation: 0,
-                side: const BorderSide(color: Color(0xFFFFD1DC), width: 1.2),
-                shape: const StadiumBorder(),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-              ),
-            ),
-          ),
-          // View Roadmap
+          // Audio Call Button
           IconButton(
-            icon: const Icon(Icons.map_rounded, color: _primaryPink, size: 22),
+            icon: const Icon(Icons.call_rounded, color: _primaryPink, size: 21),
+            tooltip: 'Audio Call',
             onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.roadmap);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CallScreen(
+                    partnerName: widget.profile.name,
+                    partnerEmoji: widget.profile.avatarEmoji,
+                    isVideoCall: false,
+                    isWaliJoined: true,
+                  ),
+                ),
+              );
             },
+          ),
+          // Video Call Button
+          IconButton(
+            icon: const Icon(Icons.videocam_rounded, color: _primaryPink, size: 23),
+            tooltip: 'Video Call',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CallScreen(
+                    partnerName: widget.profile.name,
+                    partnerEmoji: widget.profile.avatarEmoji,
+                    isVideoCall: true,
+                    isWaliJoined: true,
+                  ),
+                ),
+              );
+            },
+          ),
+          // Menu Options (Pause / End / Report / Wali)
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert_rounded, color: _primaryPink),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            onSelected: (val) {
+              if (val == 'roadmap') {
+                Navigator.pushNamed(context, AppRoutes.roadmap);
+              } else if (val == 'wali') {
+                _showWaliInviteDialog();
+              } else if (val == 'pause') {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Connection with ${widget.profile.name} paused.'),
+                    backgroundColor: _primaryPink,
+                  ),
+                );
+              } else if (val == 'end') {
+                Navigator.pushNamed(context, AppRoutes.roadmap);
+              } else if (val == 'report') {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Safety report submitted to moderation team.')),
+                );
+              }
+            },
+            itemBuilder: (ctx) => [
+              const PopupMenuItem(
+                value: 'roadmap',
+                child: Row(
+                  children: [
+                    Icon(Icons.map_rounded, size: 18, color: _primaryPink),
+                    SizedBox(width: 10),
+                    Text('Open Nikah Roadmap', style: TextStyle(fontWeight: FontWeight.w700)),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'wali',
+                child: Row(
+                  children: [
+                    Icon(Icons.family_restroom_rounded, size: 18, color: _emeraldGreen),
+                    SizedBox(width: 10),
+                    Text('Invite Wali / Guardian', style: TextStyle(fontWeight: FontWeight.w700)),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'pause',
+                child: Row(
+                  children: [
+                    Icon(Icons.pause_circle_outline_rounded, size: 18, color: Color(0xFFC07000)),
+                    SizedBox(width: 10),
+                    Text('Pause Connection', style: TextStyle(fontWeight: FontWeight.w700)),
+                  ],
+                ),
+              ),
+              const PopupMenuDivider(),
+              const PopupMenuItem(
+                value: 'end',
+                child: Row(
+                  children: [
+                    Icon(Icons.close_rounded, size: 18, color: _primaryPink),
+                    SizedBox(width: 10),
+                    Text('End Connection Respectfully', style: TextStyle(color: _primaryPink, fontWeight: FontWeight.w700)),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'report',
+                child: Row(
+                  children: [
+                    Icon(Icons.shield_outlined, size: 18, color: Colors.grey),
+                    SizedBox(width: 10),
+                    Text('Report / Block Suitor', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w700)),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
       body: SafeArea(
         child: Column(
           children: [
-            // Islamic Reminder Pill Banner
+            // Persistent Roadmap Header Bar (Clickable)
+            InkWell(
+              onTap: () => Navigator.pushNamed(context, AppRoutes.roadmap),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFF0F5),
+                  border: Border(bottom: BorderSide(color: Color(0xFFFFD1DC), width: 1)),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: _primaryPink,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.map_rounded, color: Colors.white, size: 13),
+                    ),
+                    const SizedBox(width: 8),
+                    const Expanded(
+                      child: Text(
+                        'Stage 4 of 7 • Talk Seriously (5/8 topics completed)',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF8B2B4C),
+                        ),
+                      ),
+                    ),
+                    const Icon(Icons.arrow_forward_ios_rounded, size: 11, color: _primaryPink),
+                  ],
+                ),
+              ),
+            ),
+
+            // Screenshot Protection Notice Banner
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              color: const Color(0xFFFFF9E6),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+              color: const Color(0xFFF4FBF7),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Text('🤝 ', style: TextStyle(fontSize: 13)),
+                  Icon(Icons.lock_outline_rounded, size: 12, color: _emeraldGreen),
+                  SizedBox(width: 6),
                   Text(
-                    'Halal Courtship: Communicate with respect, honesty & purity.',
+                    'Noor Shield™ Protected: Phone numbers hidden • In-app messaging only',
                     style: TextStyle(
-                      fontSize: 11.5,
+                      fontSize: 10.5,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF8B2B4C),
+                      color: Color(0xFF007554),
                     ),
                   ),
                 ],
@@ -356,14 +482,21 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
               child: Row(
                 children: [
-                  // Suggested Icebreaker Azura Icon
+                  // Azura Suggested Prompt Quick Button
                   IconButton(
                     icon: const Icon(Icons.auto_awesome_rounded,
                         color: Color(0xFFFFB800), size: 22),
+                    tooltip: 'Azura Halal Prompt',
                     onPressed: () {
                       _messageController.text =
                           "What are your thoughts on balancing career and family life?";
                     },
+                  ),
+                  // Wali / Call Quick Action
+                  IconButton(
+                    icon: const Icon(Icons.shield_rounded, color: _emeraldGreen, size: 22),
+                    tooltip: 'Invite Wali',
+                    onPressed: _showWaliInviteDialog,
                   ),
 
                   // Text Field

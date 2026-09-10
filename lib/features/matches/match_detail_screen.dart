@@ -7,8 +7,8 @@ class MatchDetailScreen extends StatelessWidget {
 
   const MatchDetailScreen({super.key, required this.profile});
 
-  static const Color _primaryPink = Color(0xFFD64D7B);
-  static const Color _buttonPink = Color(0xFFD44F7A);
+  static const Color _primaryPink = Color(0xFF941235);
+  static const Color _buttonPink = Color(0xFF941235);
   static const Color _textDark = Color(0xFF1E2022);
   static const Color _textGrey = Color(0xFF5A606E);
   static const Color _emeraldGreen = Color(0xFF007554);
@@ -255,7 +255,71 @@ class MatchDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Compatibility Reasons Card
+                  // Marriage Intent & Readiness Timeline (Separated from ID Badge)
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFFDF5),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: const Color(0xFFFFECC2)),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.alarm_on_rounded, color: Color(0xFFC07000), size: 22),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Ready for Nikah Timeline',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w800,
+                                  color: Color(0xFF8A5800),
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                '${profile.intent} (${profile.intentTag.isNotEmpty ? profile.intentTag : "HIGH URGENCY"})',
+                                style: const TextStyle(
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w900,
+                                  color: _textDark,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFE8F5E9),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            children: const [
+                              Icon(Icons.verified_rounded, color: _emeraldGreen, size: 14),
+                              SizedBox(width: 4),
+                              Text(
+                                'Intent Verified',
+                                style: TextStyle(
+                                  fontSize: 10.5,
+                                  fontWeight: FontWeight.w900,
+                                  color: _emeraldGreen,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Stage 1: 5-Category Islamic Compatibility Breakdown
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -268,32 +332,62 @@ class MatchDetailScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: const [
-                            Icon(Icons.auto_awesome_rounded,
-                                color: _primaryPink, size: 20),
+                            Icon(Icons.auto_awesome_rounded, color: _primaryPink, size: 20),
                             SizedBox(width: 8),
                             Text(
-                              'Why You Match (Azura AI)',
+                              'Stage 1: Why You Should Talk',
                               style: TextStyle(
                                 fontSize: 14.5,
-                                fontWeight: FontWeight.w800,
+                                fontWeight: FontWeight.w900,
                                 color: Color(0xFF8B2B4C),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Meaningful alignment detected in core Islamic principles, family orientation, and life timeline.',
+                          style: TextStyle(fontSize: 12.5, color: Color(0xFF5A606E), height: 1.35),
+                        ),
+                        const SizedBox(height: 14),
+
+                        // 5-Category Alignment Bars
+                        _buildCategoryBar('Deen & Practice', 0.98, '98% Aligned'),
+                        const SizedBox(height: 8),
+                        _buildCategoryBar('Family & Children', 0.95, '95% Aligned'),
+                        const SizedBox(height: 8),
+                        _buildCategoryBar('Lifestyle & Habits', 0.92, '92% Aligned'),
+                        const SizedBox(height: 8),
+                        _buildCategoryBar('Marriage Expectations', 0.96, '96% Aligned'),
+                        const SizedBox(height: 8),
+                        _buildCategoryBar('Communication Style', 0.90, '90% Aligned'),
+
+                        const SizedBox(height: 14),
+                        const Divider(height: 1, color: Color(0xFFFFD1DC)),
+                        const SizedBox(height: 12),
+
+                        // Smart Conversation Starters
+                        const Text(
+                          'Smart Respectful Starters:',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF8B2B4C),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
                         ...profile.compatibilityReasons.map(
                           (reason) => Padding(
                             padding: const EdgeInsets.only(bottom: 6.0),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('✨ ', style: TextStyle(fontSize: 12)),
+                                const Text('💬 ', style: TextStyle(fontSize: 12)),
                                 Expanded(
                                   child: Text(
                                     reason,
                                     style: const TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 12.5,
                                       fontWeight: FontWeight.w600,
                                       color: Color(0xFF4A4E5E),
                                     ),
@@ -557,6 +651,37 @@ class MatchDetailScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildCategoryBar(String category, double score, String label) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              category,
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: _textDark),
+            ),
+            Text(
+              label,
+              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: _emeraldGreen),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(
+            value: score,
+            backgroundColor: const Color(0xFFF0E5EA),
+            valueColor: const AlwaysStoppedAnimation<Color>(_emeraldGreen),
+            minHeight: 5,
+          ),
+        ),
+      ],
     );
   }
 }

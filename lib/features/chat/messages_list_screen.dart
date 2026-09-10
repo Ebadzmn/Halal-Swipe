@@ -19,8 +19,8 @@ class ConversationItem {
 class MessagesListScreen extends StatelessWidget {
   const MessagesListScreen({super.key});
 
-  static const Color _primaryPink = Color(0xFFD64D7B);
-  static const Color _buttonPink = Color(0xFFD44F7A);
+  static const Color _primaryPink = Color(0xFF941235);
+  static const Color _buttonPink = Color(0xFF941235);
   static const Color _emeraldGreen = Color(0xFF007554);
   static const Color _textDark = Color(0xFF1E2022);
   static const Color _textGrey = Color(0xFF6B7280);
@@ -213,13 +213,40 @@ class MessagesListScreen extends StatelessWidget {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          item.profile.name,
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w900,
-                            color: _textDark,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              item.profile.name,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w900,
+                                color: _textDark,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFFF0F5),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: const Color(0xFFFFD1DC)),
+                              ),
+                              child: Text(
+                                index == 0
+                                    ? 'Stage 4 • Talk Seriously'
+                                    : (index == 1
+                                        ? 'Stage 3 • Confirm Intent'
+                                        : (index == 2
+                                            ? 'Stage 6 • Involve Family'
+                                            : 'Stage 2 • Understand')),
+                                style: const TextStyle(
+                                  fontSize: 9.5,
+                                  fontWeight: FontWeight.w800,
+                                  color: _primaryPink,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         Text(
                           item.time,

@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFD44F7A),
-          primary: const Color(0xFFD44F7A),
+          seedColor: const Color(0xFF941235),
+          primary: const Color(0xFF941235),
         ),
       ),
       initialRoute: AppPages.initial,

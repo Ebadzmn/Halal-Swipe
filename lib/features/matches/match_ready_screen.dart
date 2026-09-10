@@ -7,8 +7,8 @@ class MatchReadyScreen extends StatelessWidget {
 
   const MatchReadyScreen({super.key, required this.profile});
 
-  static const Color _primaryPink = Color(0xFFD64D7B);
-  static const Color _buttonPink = Color(0xFFD44F7A);
+  static const Color _primaryPink = Color(0xFF941235);
+  static const Color _buttonPink = Color(0xFF941235);
   static const Color _emeraldGreen = Color(0xFF007554);
 
   @override
@@ -220,7 +220,7 @@ class MatchReadyScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '1. Follow the Nikah Roadmap with Azura guidance\n2. Involve your Wali early for transparency and barakah',
+                        '1. Follow the 7-Stage Nikah Roadmap with Azura guidance\n2. Involve your Wali at any stage for transparency and barakah',
                         style: TextStyle(
                           fontSize: 12.5,
                           color: Colors.white.withValues(alpha: 0.9),

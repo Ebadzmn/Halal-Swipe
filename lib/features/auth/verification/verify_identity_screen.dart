@@ -4,8 +4,8 @@ import 'package:halal_swipe/routes/app_routes.dart';
 class VerifyIdentityScreen extends StatelessWidget {
   const VerifyIdentityScreen({super.key});
 
-  static const Color _primaryPink = Color(0xFFD64D7B);
-  static const Color _buttonPink = Color(0xFFD44F7A);
+  static const Color _primaryPink = Color(0xFF941235);
+  static const Color _buttonPink = Color(0xFF941235);
   static const Color _textDark = Color(0xFF1E2022);
   static const Color _textGrey = Color(0xFF5A606E);
 

@@ -15,5 +15,9 @@ class AppRoutes {
   static const String unlockPhoto = '/unlock-photo';
   static const String matchReady = '/match-ready';
   static const String roadmap = '/roadmap';
+  static const String nikahCelebration = '/nikah-celebration';
+  static const String marriedCoupleHub = '/married-couple-hub';
+  static const String myProfile = '/my-profile';
+  static const String editProfile = '/edit-profile';
   static const String chat = '/chat';
 }

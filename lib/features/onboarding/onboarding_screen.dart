@@ -31,23 +31,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
 
   late final List<OnboardingModel> _pages = [
-    // 1st Screen: Smart Compatibility Matching
+    // 1st Screen: The 7-Stage Nikah Roadmap
     OnboardingModel(
       iconWidget: const _AnimatedCompatibilityIllustration(),
-      title: 'Smart Compatibility\nMatching',
+      title: 'A Guided 7-Stage\nJourney to Nikah 💍',
       description:
-          'We calculate real compatibility across Deen,\nFamily, Lifestyle, and more. Only show you\npeople who genuinely match what you need\nin a spouse.',
+          'From initial match to family involvement and real-world Nikah. A purposeful step-by-step roadmap designed for marriage, not endless swiping.',
       bgStartColor: const Color(0xFFC0185D),
       bgEndColor: const Color(0xFF6B0632),
       buttonTextColor: const Color(0xFFB51755),
     ),
 
-    // 2nd Screen: Privacy First. Always.
+    // 2nd Screen: Privacy & Modesty First. Always.
     OnboardingModel(
       iconWidget: const _AnimatedPrivacyIllustration(),
-      title: 'Privacy First.\nAlways.',
+      title: 'Privacy & Modesty First.\nAlways. 🛡️',
       description:
-          'Noor Shield adds screenshot protection\nacross supported areas. Your extra photos\nstay blurred until you choose to unlock a\nmatch.',
+          'Noor Shield™ protects photos with modest blur until mutual unlock. No phone number sharing and early Wali oversight at every stage.',
       bgStartColor: const Color(0xFF9E2C52),
       bgEndColor: const Color(0xFF801E3E),
       buttonTextColor: const Color(0xFF9E2C52),
@@ -56,20 +56,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     // 3rd Screen: Meet Azura Your Marriage Guide
     OnboardingModel(
       iconWidget: const _AnimatedAzuraIllustration(),
-      title: 'Meet Azura\nYour Marriage Guide',
+      title: 'Meet Azura 🌙\nYour Marriage Guide',
       description:
-          'Azura uses AI to provide match-aware\nmarriage guidance. She helps you ask the\nright questions. You make the decision.',
+          'Azura AI helps you explore 8 vital premarital topics — from Deen and finances to family vision.\n"Azura guides reflection. You make the decision."',
       bgStartColor: const Color(0xFF1E1A34),
       bgEndColor: const Color(0xFF120E22),
       buttonTextColor: const Color(0xFFD84A79),
     ),
 
-    // 4th Screen: First Month Completely FREE
+    // 4th Screen: Verified Intent & First Month FREE
     OnboardingModel(
       iconWidget: const _AnimatedCelebrationIllustration(),
-      title: 'First Month\nCompletely FREE',
+      title: 'Verified Marriage Intent.\nFirst Month FREE ✨',
       description:
-          'No credit card. No commitment. No risk. 30\ndays of access — join Muslims worldwide\nfinding real halal connections.',
+          'Connect with Muslims genuinely ready for marriage. No credit card, no risk — begin your blessed journey with pure intentions.',
       bgStartColor: const Color(0xFF007554),
       bgEndColor: const Color(0xFF004D36),
       buttonTextColor: const Color(0xFF007554),

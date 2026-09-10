@@ -18,8 +18,8 @@ class _SignupPageState extends State<SignupPage> {
 
   bool _agreedToTerms = false;
 
-  static const Color _primaryPink = Color(0xFFD64D7B);
-  static const Color _buttonPink = Color(0xFFD44F7A);
+  static const Color _primaryPink = Color(0xFF941235);
+  static const Color _buttonPink = Color(0xFF941235);
   static const Color _inputFill = Color(0xFFFDF6F8);
   static const Color _inputBorder = Color(0xFFF3D2DE);
   static const Color _textDark = Color(0xFF1E2022);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:halal_swipe/features/chat/messages_list_screen.dart';
 import 'package:halal_swipe/features/matches/models/match_profile.dart';
+import 'package:halal_swipe/features/profile/my_profile_screen.dart';
 import 'package:halal_swipe/features/roadmap/nikah_roadmap_screen.dart';
 import 'package:halal_swipe/routes/app_routes.dart';
 
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   // Refined Color Palette
   static const Color _brandBurgundy = Color(0xFF8A1E41); // Deep Raspberry/Burgundy for Introduce button
-  static const Color _buttonPink = Color(0xFFD44F7A);
+  static const Color _buttonPink = Color(0xFF941235);
   static const Color _textDark = Color(0xFF1E2022);
   static const Color _textGrey = Color(0xFF757A88);
   static const Color _goldAccent = Color(0xFFFFC72C);
@@ -43,82 +44,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFB),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFFAFAFB),
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 14.0),
-          child: Container(
-            margin: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFEFEFEF), width: 1.2),
-            ),
-            child: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: _textDark,
-              size: 15,
-            ),
-          ),
-        ),
-        title: Column(
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Text(
-                  'Curated Matches',
-                  style: TextStyle(
-                    fontFamily: 'serif',
-                    color: _textDark,
-                    fontSize: 21,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: -0.3,
-                  ),
-                ),
-                SizedBox(width: 5),
-                Text('🌙', style: TextStyle(fontSize: 18)),
-              ],
-            ),
-            const SizedBox(height: 2),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Text('★ ', style: TextStyle(fontSize: 9.5, color: Color(0xFFC8902A))),
-                Text(
-                  'HANDCRAFTED SELECTION',
-                  style: TextStyle(
-                    fontSize: 9,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFFC8902A),
-                    letterSpacing: 0.8,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        centerTitle: true,
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 16, top: 6, bottom: 6),
-            width: 38,
-            height: 38,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFEFEFEF), width: 1.2),
-            ),
-            child: IconButton(
-              icon: const Icon(Icons.tune_rounded, color: _textDark, size: 18),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.setupPreferences);
-              },
-            ),
-          ),
-        ],
-      ),
+      appBar: _currentIndex == 0 ? _buildHomeAppBar() : null,
       body: _buildCurrentTab(),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -184,10 +110,89 @@ class _HomePageState extends State<HomePage> {
       case 3:
         return _buildAzuraPlaceholder();
       case 4:
-        return _buildProfilePlaceholder();
+        return const MyProfileScreen();
       default:
         return _buildCuratedMatchesBody();
     }
+  }
+
+  PreferredSizeWidget _buildHomeAppBar() {
+    return AppBar(
+      backgroundColor: const Color(0xFFFAFAFB),
+      elevation: 0,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 14.0),
+        child: Container(
+          margin: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            border: Border.all(color: const Color(0xFFEFEFEF), width: 1.2),
+          ),
+          child: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: _textDark,
+            size: 15,
+          ),
+        ),
+      ),
+      title: Column(
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text(
+                'Curated Matches',
+                style: TextStyle(
+                  fontFamily: 'serif',
+                  color: _textDark,
+                  fontSize: 21,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: -0.3,
+                ),
+              ),
+              SizedBox(width: 5),
+              Text('🌙', style: TextStyle(fontSize: 18)),
+            ],
+          ),
+          const SizedBox(height: 2),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text('★ ', style: TextStyle(fontSize: 9.5, color: Color(0xFFC8902A))),
+              Text(
+                'HANDCRAFTED SELECTION',
+                style: TextStyle(
+                  fontSize: 9,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFFC8902A),
+                  letterSpacing: 0.8,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      centerTitle: true,
+      actions: [
+        Container(
+          margin: const EdgeInsets.only(right: 16, top: 6, bottom: 6),
+          width: 38,
+          height: 38,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            border: Border.all(color: const Color(0xFFEFEFEF), width: 1.2),
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.tune_rounded, color: _textDark, size: 18),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.setupPreferences);
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   // ==========================================================
