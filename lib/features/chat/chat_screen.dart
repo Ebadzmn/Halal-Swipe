@@ -275,9 +275,51 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         actions: [
           // Audio Call Button
+<<<<<<< HEAD
           IconButton(
             icon: const Icon(Icons.call_rounded, color: _primaryPink, size: 21),
             tooltip: 'Audio Call',
+=======
+          IconButton(
+            icon: const Icon(Icons.call_rounded, color: _primaryPink, size: 21),
+            tooltip: 'Audio Call',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CallScreen(
+                    partnerName: widget.profile.name,
+                    partnerEmoji: widget.profile.avatarEmoji,
+                    isVideoCall: false,
+                    isWaliJoined: true,
+                  ),
+                ),
+              );
+            },
+          ),
+          // Video Call Button
+          IconButton(
+            icon: const Icon(Icons.videocam_rounded, color: _primaryPink, size: 23),
+            tooltip: 'Video Call',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CallScreen(
+                    partnerName: widget.profile.name,
+                    partnerEmoji: widget.profile.avatarEmoji,
+                    isVideoCall: true,
+                    isWaliJoined: true,
+                  ),
+                ),
+              );
+            },
+          ),
+          // View Roadmap
+          IconButton(
+            icon: const Icon(Icons.map_rounded, color: _primaryPink, size: 21),
+            tooltip: 'Roadmap',
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
             onPressed: () {
               Navigator.push(
                 context,

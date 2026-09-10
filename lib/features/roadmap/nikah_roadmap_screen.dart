@@ -40,6 +40,7 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
   static const Color _textDark = Color(0xFF1E2022);
   static const Color _textGrey = Color(0xFF6B7280);
 
+<<<<<<< HEAD
   // Active current stage (1 to 7)
   int _currentStageNumber = 4;
 
@@ -62,6 +63,24 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
   };
 
   // The Official 7-Stage Nikah Roadmap
+=======
+  // Active current stage (1 to 6)
+  int _currentStageNumber = 3;
+
+  // Track user consent state for current stage: 'not_agreed', 'pending_partner', 'approved'
+  bool _userAgreedCurrentStage = false;
+  bool _partnerAgreedCurrentStage = false;
+
+  // Checklist checked state map: "stageNumber_itemIndex" -> bool
+  final Map<String, bool> _checklistState = {
+    // Pre-check Stage 1 & 2 items
+    '1_0': true, '1_1': true, '1_2': true,
+    '2_0': true, '2_1': true, '2_2': true,
+    // Stage 3 items
+    '3_0': true, '3_1': true, '3_2': false,
+  };
+
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
   final List<RoadmapStage> _stages = const [
     RoadmapStage(
       stageNumber: 1,
@@ -91,9 +110,15 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
     ),
     RoadmapStage(
       stageNumber: 3,
+<<<<<<< HEAD
       title: 'Confirm Intent',
       subtitle: 'Align on marriage readiness & timelines',
       iconEmoji: '🎯',
+=======
+      title: 'Values & Compatibility',
+      subtitle: 'Core deen, character & life vision',
+      iconEmoji: '🕌',
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
       explanation:
           'Verify that both individuals share genuine marriage intent and compatible Ready for Nikah timelines.',
       checklist: [
@@ -104,9 +129,15 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
     ),
     RoadmapStage(
       stageNumber: 4,
+<<<<<<< HEAD
       title: 'Talk Seriously',
       subtitle: '8 structured premarital conversations with Azura',
       iconEmoji: '🕌',
+=======
+      title: 'Family / Wali Involvement',
+      subtitle: 'Official guardian invite & family introduction',
+      iconEmoji: '👨‍👩‍👧',
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
       explanation:
           'Azura guides couples through 8 vital premarital areas. Revisit topics anytime and complete a compatibility re-check.',
       checklist: [
@@ -122,9 +153,15 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
     ),
     RoadmapStage(
       stageNumber: 5,
+<<<<<<< HEAD
       title: 'Marriage Checkpoint',
       subtitle: 'Structured review & private family-readiness poll',
       iconEmoji: '⚖️',
+=======
+      title: 'Marriage Discussion',
+      subtitle: 'Mahr, Nikah contract & practical steps',
+      iconEmoji: '🤝',
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
       explanation:
           'Review progress, alignment changes, and compatibility re-check. Privately state readiness for formal family involvement.',
       checklist: [
@@ -136,9 +173,15 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
     ),
     RoadmapStage(
       stageNumber: 6,
+<<<<<<< HEAD
       title: 'Involve Family',
       subtitle: 'Barakah Room, Wali invitation & group meetings',
       iconEmoji: '👨‍👩‍👧',
+=======
+      title: 'Nikah Preparation',
+      subtitle: 'Official solemnization & blessed start',
+      iconEmoji: '💍',
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
       explanation:
           'Recommended formal step to bring families together with Azura Family Guide, group video meetings, and next-step checklist.',
       checklist: [
@@ -175,6 +218,7 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
     });
   }
 
+<<<<<<< HEAD
   void _showPauseOrEndModal() {
     showModalBottomSheet(
       context: context,
@@ -550,6 +594,8 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
     );
   }
 
+=======
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
   bool _areAllCurrentChecklistItemsCompleted() {
     final currentStage = _stages.firstWhere((s) => s.stageNumber == _currentStageNumber);
     for (int i = 0; i < currentStage.checklist.length; i++) {
@@ -905,6 +951,7 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
     }
   }
 
+<<<<<<< HEAD
   void _simulateJumpToStage(int targetStage) {
     setState(() {
       _currentStageNumber = targetStage;
@@ -1034,6 +1081,8 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
     );
   }
 
+=======
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
   @override
   Widget build(BuildContext context) {
     final double progressPercent = _currentStageNumber / _stages.length;
@@ -1472,6 +1521,7 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
                     const SizedBox(height: 12),
                     const Divider(height: 1, color: Color(0xFFFFD1DC)),
                     const SizedBox(height: 10),
+<<<<<<< HEAD
                     Row(
                       children: [
                         const Expanded(
@@ -1514,6 +1564,15 @@ class _NikahRoadmapScreenState extends State<NikahRoadmapScreen> {
                           ),
                         ),
                       ],
+=======
+                    const Text(
+                      'Stage Action Checklist (Tap to mark done):',
+                      style: TextStyle(
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w800,
+                        color: _textDark,
+                      ),
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
                     ),
                     const SizedBox(height: 8),
                     ...List.generate(stage.checklist.length, (itemIdx) {

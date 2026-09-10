@@ -309,12 +309,21 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
           const SizedBox(height: 18),
 
+<<<<<<< HEAD
           // 3 Pill Badges at Bottom of Maroon Card (Distinguishing ID from Marriage Intent)
           Row(
             children: [
               _buildMaroonPillBadge('INTENT BADGE', 'Verified 4/4 🎯', const Color(0xFF00E676)),
               const SizedBox(width: 8),
               _buildMaroonPillBadge('NIKAH TIMELINE', 'Within 6 Mos', const Color(0xFFFFD438)),
+=======
+          // 3 Pill Badges at Bottom of Maroon Card
+          Row(
+            children: [
+              _buildMaroonPillBadge('ID VERIFICATION', 'Verified ✓', const Color(0xFF00E676)),
+              const SizedBox(width: 8),
+              _buildMaroonPillBadge('PROFILE SCORE', '98% Complete', const Color(0xFFFFD438)),
+>>>>>>> c46467f7fa99b010fcd2783f93f04e8c194b88c7
               const SizedBox(width: 8),
               _buildMaroonPillBadge('WALI STATUS', 'Linked 🛡️', const Color(0xFF4FC3F7)),
             ],
